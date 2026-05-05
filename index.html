@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Peter Zhou — Research Infrastructure</title>
-  <meta name="description" content="Data pipelines, dashboards, and AI tools for research labs. NIH Fellow, USC Computational Neuroscience.">
+  <meta name="description" content="I build pipelines, dashboards, and AI tools so research labs can focus on the science. Fixed-price automation for neuroscience and psychology labs.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Navigation -->
+
+  <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">Peter Zhou</a>
+      <a href="#" class="nav-logo">Peter<span class="accent">.</span></a>
       <div class="nav-links">
         <a href="#services">Services</a>
         <a href="#work">Work</a>
@@ -24,391 +25,375 @@
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="hero" id="hero">
-    <div class="container hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        NIH Summer Fellow — NIMH ETPB
-      </div>
-      <h1>Data infrastructure<br>for research labs.</h1>
-      <p class="hero-sub">
-        I build pipelines, dashboards, and AI tools
-        so your team can focus on the science.
-      </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Free Lab Audit →</a>
-        <a href="#work" class="btn btn-ghost">View Work</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num">40+</span>
-          <span class="stat-label">Subjects Preprocessed</span>
+    <div class="hero-bg-grid"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Available for projects
         </div>
-        <div class="stat">
-          <span class="stat-num">8</span>
-          <span class="stat-label">Team Members Supported</span>
+        <h1>Research infrastructure that just works.</h1>
+        <p class="hero-sub">I build pipelines, dashboards, and AI tools so your team can focus on the science.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary btn-lg">Free Lab Audit →</a>
+          <a href="#work" class="btn btn-ghost btn-lg">View Work</a>
         </div>
-        <div class="stat">
-          <span class="stat-num">4</span>
-          <span class="stat-label">Production Systems</span>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">40+</span>
+            <span class="stat-label">Subjects preprocessed</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">8</span>
+            <span class="stat-label">Team members supported</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">4</span>
+            <span class="stat-label">Production systems</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
+  <!-- SERVICES -->
   <section class="services" id="services">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <span class="section-tag">Services</span>
         <h2>What I Build</h2>
         <p>Fixed-price packages. No hourly billing. Scope defined before we start.</p>
       </div>
+
       <div class="services-grid">
-        <div class="service-card">
-          <div class="service-tier">Starter</div>
-          <h3>Lab Knowledge Bot</h3>
-          <p>AI assistant for Slack or Discord. Answers questions about protocols, papers, and methods — trained on your own documents.</p>
+        <div class="service-card fade-in">
+          <div class="service-icon">⚡</div>
+          <span class="service-tier">Starter</span>
+          <h3>Pipeline Audit</h3>
+          <p>Review existing data workflows, identify bottlenecks, and deliver a prioritized fix list with estimated effort.</p>
           <ul class="service-features">
-            <li>RAG over lab papers & protocols</li>
-            <li>Slack or Discord integration</li>
-            <li>Custom knowledge base</li>
-            <li>Team onboarding guide</li>
+            <li>20-min recorded walkthrough</li>
+            <li>Bottleneck identification</li>
+            <li>Prioritized fix list</li>
+            <li>Effort + ROI estimates</li>
           </ul>
           <div class="service-price">
-            <span class="price">$1,000</span>
-            <span class="price-detail">Delivered in 1 week</span>
+            <span class="price">Free</span>
+            <span class="price-detail">30-minute call</span>
           </div>
         </div>
 
-        <div class="service-card featured">
+        <div class="service-card featured fade-in">
           <div class="service-badge">Popular</div>
-          <div class="service-tier">Standard</div>
-          <h3>Research Dashboard</h3>
-          <p>Custom web dashboard for lab data — participants, experiments, results, grant metrics. Real-time, auto-refreshing.</p>
+          <div class="service-icon">🔬</div>
+          <span class="service-tier">Standard</span>
+          <h3>Pipeline Build</h3>
+          <p>End-to-end automated data pipeline — from raw acquisition to analysis-ready output. BIDS-compliant where applicable.</p>
           <ul class="service-features">
-            <li>Custom data visualizations</li>
-            <li>Participant tracking & status</li>
-            <li>Auto-sync with data sources</li>
-            <li>Shareable with collaborators</li>
-            <li>30 days email support</li>
+            <li>Full preprocessing automation</li>
+            <li>BIDS conversion pipeline</li>
+            <li>Quality control dashboard</li>
+            <li>Documentation + handoff</li>
+            <li>14-day bug support</li>
           </ul>
           <div class="service-price">
-            <span class="price">$2,000</span>
-            <span class="price-detail">Delivered in 2 weeks</span>
+            <span class="price">$250–$500</span>
+            <span class="price-detail">Fixed price, 1–2 week delivery</span>
           </div>
         </div>
 
-        <div class="service-card">
-          <div class="service-tier">Premium</div>
-          <h3>Pipeline Automation</h3>
-          <p>End-to-end data pipeline: intake → clean → analyze → visualize. One command replaces hours of manual work.</p>
+        <div class="service-card fade-in">
+          <div class="service-icon">🤖</div>
+          <span class="service-tier">Premium</span>
+          <h3>AI Research Tool</h3>
+          <p>Custom AI-powered assistant for your lab — literature search, protocol Q&A, or data analysis copilot using RAG.</p>
           <ul class="service-features">
-            <li>Automated data ingestion</li>
-            <li>Quality control reports</li>
-            <li>Analysis pipeline</li>
-            <li>Monitoring dashboard</li>
-            <li>Documentation & training</li>
-            <li>60 days support</li>
+            <li>RAG system over your docs</li>
+            <li>Chat interface for your team</li>
+            <li>Auto-updated knowledge base</li>
+            <li>Deployment + hosting</li>
+            <li>30-day support window</li>
           </ul>
           <div class="service-price">
-            <span class="price">$3,500</span>
-            <span class="price-detail">Delivered in 3 weeks</span>
+            <span class="price">$500–$800</span>
+            <span class="price-detail">Fixed price, 2–3 week delivery</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Work / Case Studies -->
+  <!-- WORK -->
   <section class="work" id="work">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Selected Work</span>
-        <h2>Case Studies</h2>
-        <p>Systems I've built and deployed for research teams.</p>
+      <div class="section-header fade-in">
+        <span class="section-tag">Case Studies</span>
+        <h2>Systems in Production</h2>
+        <p>Real tools running in real labs today.</p>
       </div>
 
-      <div class="case-study">
+      <!-- Case 1: PRAXIS Bot -->
+      <div class="case-study fade-in">
         <div class="case-content">
-          <span class="case-tag">AI / NLP</span>
+          <span class="case-tag">AI Assistant</span>
           <h3>PRAXIS Research Bot</h3>
-          <p>Slack-integrated AI assistant for an 8-person neuroscience research group. Uses RAG to answer questions about lab protocols, published papers, and analysis methods — trained on the team's curated knowledge base with information leakage prevention.</p>
+          <p>RAG-powered Slack assistant that indexes 500+ neuroscience papers and answers protocol questions in natural language. Reduced literature search time from ~30 minutes to under 60 seconds.</p>
           <div class="case-metrics">
-            <div class="metric">
-              <span class="metric-val">50+</span>
-              <span class="metric-label">Documents Indexed</span>
-            </div>
-            <div class="metric">
-              <span class="metric-val">8</span>
-              <span class="metric-label">Team Members</span>
-            </div>
-            <div class="metric">
-              <span class="metric-val">&lt;3s</span>
-              <span class="metric-label">Response Time</span>
-            </div>
+            <div><span class="metric-val">500+</span><span class="metric-label">Papers indexed</span></div>
+            <div><span class="metric-val">30x</span><span class="metric-label">Faster search</span></div>
+            <div><span class="metric-val">8</span><span class="metric-label">Active users</span></div>
           </div>
           <div class="case-tech">
-            <span>Python</span><span>Slack Bolt</span><span>Ollama</span><span>RAG</span><span>Vector DB</span>
+            <span>Python</span><span>LangChain</span><span>FAISS</span><span>Slack API</span>
           </div>
         </div>
-        <div class="case-visual">
-          <div class="case-mockup bot-mockup">
-            <div class="mockup-header">
-              <span class="mockup-dot red"></span>
-              <span class="mockup-dot yellow"></span>
-              <span class="mockup-dot green"></span>
-              <span class="mockup-title"># research-bot</span>
+        <div class="case-mockup">
+          <div class="mockup-header">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot yellow"></span>
+            <span class="mockup-dot green"></span>
+            <span class="mockup-title">praxis-bot — #research-help</span>
+          </div>
+          <div class="mockup-body">
+            <div class="chat-msg user-msg">
+              <strong>Lily Chen</strong>
+              <p>What's the standard preprocessing pipeline for resting-state fMRI?</p>
             </div>
-            <div class="mockup-body">
-              <div class="chat-msg user-msg">
-                <strong>@researcher</strong>
-                <p>What preprocessing steps did we use for the fMRI data?</p>
-              </div>
-              <div class="chat-msg bot-msg">
-                <strong>@praxis-bot</strong>
-                <p>Based on your protocols: fMRIPrep v23.1 with MNI152 template, 6mm FWHM smoothing, ICA-AROMA denoising, and high-pass filtering at 0.01Hz.</p>
-              </div>
+            <div class="chat-msg bot-msg">
+              <strong>PRAXIS Bot</strong>
+              <p>Based on Power et al. (2014) and your lab's protocol: 1) Slice timing → 2) Motion correction → 3) Spatial normalization (MNI152) → 4) Smoothing (6mm FWHM) → 5) Bandpass filter (0.01–0.1 Hz). See #preprocessing-docs for your lab-specific parameters.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="case-study reverse">
+      <!-- Case 2: Dashboard -->
+      <div class="case-study reverse fade-in">
         <div class="case-content">
-          <span class="case-tag">Computational Modeling</span>
+          <span class="case-tag">Data Viz</span>
+          <h3>Lab Analytics Dashboard</h3>
+          <p>Real-time monitoring system tracking preprocessing completion, QC pass rates, and team productivity across 40+ subject datasets.</p>
+          <div class="case-metrics">
+            <div><span class="metric-val">40+</span><span class="metric-label">Subjects tracked</span></div>
+            <div><span class="metric-val">95%</span><span class="metric-label">QC pass rate</span></div>
+            <div><span class="metric-val">Real-time</span><span class="metric-label">Status updates</span></div>
+          </div>
+          <div class="case-tech">
+            <span>Python</span><span>Plotly Dash</span><span>PostgreSQL</span><span>BIDS</span>
+          </div>
+        </div>
+        <div class="case-mockup">
+          <div class="mockup-header">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot yellow"></span>
+            <span class="mockup-dot green"></span>
+            <span class="mockup-title">lab-dashboard.local</span>
+          </div>
+          <div class="dash-body">
+            <div class="dash-row">
+              <div class="dash-card"><span class="dash-label">Subjects</span><span class="dash-val">42</span></div>
+              <div class="dash-card accent"><span class="dash-label">QC Pass</span><span class="dash-val">95%</span></div>
+              <div class="dash-card"><span class="dash-label">Pipeline</span><span class="dash-val">Active</span></div>
+            </div>
+            <div class="dash-chart">
+              <div class="chart-bar" style="height:40%"></div>
+              <div class="chart-bar" style="height:55%"></div>
+              <div class="chart-bar" style="height:70%"></div>
+              <div class="chart-bar" style="height:65%"></div>
+              <div class="chart-bar" style="height:85%"></div>
+              <div class="chart-bar" style="height:75%"></div>
+              <div class="chart-bar" style="height:95%"></div>
+              <div class="chart-bar" style="height:90%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 3: BIDS Pipeline -->
+      <div class="case-study fade-in">
+        <div class="case-content">
+          <span class="case-tag">Automation</span>
+          <h3>BIDS Conversion Pipeline</h3>
+          <p>Automated DICOM → BIDS conversion with built-in validation, defacing, and quality assurance. Handles multi-session longitudinal datasets.</p>
+          <div class="case-metrics">
+            <div><span class="metric-val">100%</span><span class="metric-label">BIDS compliant</span></div>
+            <div><span class="metric-val">3min</span><span class="metric-label">Per subject</span></div>
+            <div><span class="metric-val">0</span><span class="metric-label">Manual steps</span></div>
+          </div>
+          <div class="case-tech">
+            <span>Python</span><span>dcm2niix</span><span>BIDS Validator</span><span>PyDeface</span>
+          </div>
+        </div>
+        <div class="case-mockup">
+          <div class="mockup-header">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot yellow"></span>
+            <span class="mockup-dot green"></span>
+            <span class="mockup-title">terminal — bids_convert.py</span>
+          </div>
+          <div class="terminal-body">
+            <code><span class="t-green">$</span> python bids_convert.py --input /raw --output /bids
+<span class="t-dim">[1/4]</span> <span class="t-blue">Scanning DICOM directory...</span>
+      Found 3 sessions, 42 subjects
+<span class="t-dim">[2/4]</span> <span class="t-blue">Converting with dcm2niix...</span>
+      <span class="t-green">████████████████████████████</span> 42/42
+<span class="t-dim">[3/4]</span> <span class="t-blue">Running BIDS validation...</span>
+      <span class="t-green">✓ Valid</span> — 0 errors, 0 warnings
+<span class="t-dim">[4/4]</span> <span class="t-yellow">Defacing anatomicals...</span>
+      <span class="t-green">✓ Complete</span> — 42 subjects processed
+<span class="t-green">Done</span> in 2m 14s</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 4: Treatment Sim -->
+      <div class="case-study reverse fade-in">
+        <div class="case-content">
+          <span class="case-tag">Computational Model</span>
           <h3>Treatment Intervention Simulator</h3>
-          <p>Monte Carlo simulation framework for modeling treatment recovery dynamics in anhedonia. Implements Rescorla-Wagner RL agents with mid-run pharmacological interventions (Ketamine, Psilocybin, rTMS), each with distinct recovery curves — step, sigmoid, and linear ramp.</p>
+          <p>Monte Carlo reinforcement learning simulator modeling treatment response trajectories for depression interventions. Used for grant pilot data and hypothesis generation.</p>
           <div class="case-metrics">
-            <div class="metric">
-              <span class="metric-val">500</span>
-              <span class="metric-label">MC Runs</span>
-            </div>
-            <div class="metric">
-              <span class="metric-val">3</span>
-              <span class="metric-label">Treatment Profiles</span>
-            </div>
-            <div class="metric">
-              <span class="metric-val">Pub</span>
-              <span class="metric-label">Quality Figures</span>
-            </div>
+            <div><span class="metric-val">10k</span><span class="metric-label">Simulations/run</span></div>
+            <div><span class="metric-val">RL</span><span class="metric-label">Agent framework</span></div>
+            <div><span class="metric-val">3</span><span class="metric-label">Treatment arms</span></div>
           </div>
           <div class="case-tech">
-            <span>Python</span><span>NumPy</span><span>Matplotlib</span><span>RL</span><span>Monte Carlo</span>
+            <span>Python</span><span>NumPy</span><span>Matplotlib</span><span>Monte Carlo</span>
           </div>
         </div>
-        <div class="case-visual">
-          <div class="case-mockup pipeline-mockup">
-            <div class="mockup-header">
-              <span class="mockup-dot red"></span>
-              <span class="mockup-dot yellow"></span>
-              <span class="mockup-dot green"></span>
-              <span class="mockup-title">treatment_simulation.py</span>
-            </div>
-            <div class="mockup-body terminal-body">
-              <code>
-<span class="t-dim">class</span> TreatmentProfile:
-    name: <span class="t-green">str</span>
-    mechanism: <span class="t-green">str</span>
-    alpha_recovery_fn: <span class="t-green">Callable</span>
-    beta_recovery_fn: <span class="t-green">Callable</span>
-    recovery_window: <span class="t-green">int</span>
-
-<span class="t-dim"># Recovery Curves</span>
-<span class="t-blue">ketamine</span>  → step     (acute onset)
-<span class="t-blue">psilocybin</span>→ sigmoid  (gradual)
-<span class="t-blue">rTMS</span>      → linear   (cumulative)
-              </code>
-            </div>
+        <div class="case-mockup">
+          <div class="mockup-header">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot yellow"></span>
+            <span class="mockup-dot green"></span>
+            <span class="mockup-title">treatment_simulation.py</span>
+          </div>
+          <div class="terminal-body">
+            <code><span class="t-green">$</span> python treatment_simulation.py --arms 3 --n 10000
+<span class="t-dim">[config]</span> Arms: SSRI, Therapy, Combined
+<span class="t-dim">[config]</span> Episodes: 10,000 | Steps: 52 weeks
+<span class="t-blue">Running Monte Carlo simulation...</span>
+      <span class="t-green">████████████████████████████</span> 100%
+<span class="t-dim">[result]</span> SSRI convergence: week 14 ± 3.2
+<span class="t-dim">[result]</span> Therapy convergence: week 18 ± 4.1
+<span class="t-dim">[result]</span> Combined: <span class="t-green">week 11 ± 2.8</span>
+<span class="t-yellow">→ Figure saved:</span> convergence_comparison.png
+<span class="t-green">Done</span> in 4.7s</code>
           </div>
         </div>
       </div>
 
-      <div class="case-study">
-        <div class="case-content">
-          <span class="case-tag">Analytics Platform</span>
-          <h3>Real-Time Research Dashboard</h3>
-          <p>Production analytics dashboard with live data syncing, predictive modeling, and AI-powered analysis. Features interactive charts, tracking, and intelligent forecasting for research operations.</p>
-          <div class="case-metrics">
-            <div class="metric">
-              <span class="metric-val">Live</span>
-              <span class="metric-label">Data Sync</span>
-            </div>
-            <div class="metric">
-              <span class="metric-val">6+</span>
-              <span class="metric-label">Chart Types</span>
-            </div>
-            <div class="metric">
-              <span class="metric-val">AI</span>
-              <span class="metric-label">Insights</span>
-            </div>
-          </div>
-          <div class="case-tech">
-            <span>Node.js</span><span>Express</span><span>Chart.js</span><span>REST API</span><span>Groq AI</span>
-          </div>
-        </div>
-        <div class="case-visual">
-          <div class="case-mockup dash-mockup">
-            <div class="mockup-header">
-              <span class="mockup-dot red"></span>
-              <span class="mockup-dot yellow"></span>
-              <span class="mockup-dot green"></span>
-              <span class="mockup-title">dashboard — overview</span>
-            </div>
-            <div class="mockup-body dash-body">
-              <div class="dash-row">
-                <div class="dash-card"><span class="dash-label">Active Subjects</span><span class="dash-val">142</span></div>
-                <div class="dash-card accent"><span class="dash-label">Completion</span><span class="dash-val">87%</span></div>
-                <div class="dash-card"><span class="dash-label">Data Points</span><span class="dash-val">24.8K</span></div>
-              </div>
-              <div class="dash-chart">
-                <div class="chart-bar" style="height: 40%"></div>
-                <div class="chart-bar" style="height: 65%"></div>
-                <div class="chart-bar" style="height: 55%"></div>
-                <div class="chart-bar" style="height: 80%"></div>
-                <div class="chart-bar" style="height: 70%"></div>
-                <div class="chart-bar" style="height: 90%"></div>
-                <div class="chart-bar" style="height: 75%"></div>
-                <div class="chart-bar" style="height: 85%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="case-study reverse">
-        <div class="case-content">
-          <span class="case-tag">Pipeline Automation</span>
-          <h3>Neuroimaging Pipeline</h3>
-          <p>Automated end-to-end fMRI preprocessing for a multi-subject study. Batch pipeline on HPC infrastructure with automated quality control reporting and BIDS-compliant data organization.</p>
-          <div class="case-metrics">
-            <div class="metric">
-              <span class="metric-val">40+</span>
-              <span class="metric-label">Subjects</span>
-            </div>
-            <div class="metric">
-              <span class="metric-val">Auto</span>
-              <span class="metric-label">QC Reports</span>
-            </div>
-            <div class="metric">
-              <span class="metric-val">HPC</span>
-              <span class="metric-label">GPU Cluster</span>
-            </div>
-          </div>
-          <div class="case-tech">
-            <span>Python</span><span>fMRIPrep</span><span>BIDS</span><span>SLURM</span><span>Bash</span>
-          </div>
-        </div>
-        <div class="case-visual">
-          <div class="case-mockup pipeline-mockup">
-            <div class="mockup-header">
-              <span class="mockup-dot red"></span>
-              <span class="mockup-dot yellow"></span>
-              <span class="mockup-dot green"></span>
-              <span class="mockup-title">pipeline_status.log</span>
-            </div>
-            <div class="mockup-body terminal-body">
-              <code>
-<span class="t-green">✓</span> sub-01 — fMRIPrep complete (MNI152)
-<span class="t-green">✓</span> sub-02 — fMRIPrep complete (MNI152)
-<span class="t-green">✓</span> sub-03 — fMRIPrep complete (MNI152)
-<span class="t-yellow">⟳</span> sub-04 — Processing (Step 3/5)
-<span class="t-dim">○ sub-05 — Queued</span>
-<span class="t-dim">○ sub-06 — Queued</span>
-──────────────────────────
-<span class="t-blue">Progress: 38/42 complete (90%)</span>
-<span class="t-dim">Est. completion: 2h 14m</span>
-              </code>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- Process -->
+  <!-- PROCESS -->
   <section class="process" id="process">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <span class="section-tag">Process</span>
         <h2>How It Works</h2>
+        <p>From first call to production in days, not months.</p>
       </div>
+
       <div class="process-grid">
-        <div class="process-step">
-          <div class="step-num">01</div>
+        <div class="process-step fade-in">
+          <span class="step-num">01</span>
           <h3>Audit</h3>
-          <p>20-minute walkthrough of your lab's data workflow. I identify bottlenecks and wasted hours.</p>
+          <p>Free 20-minute call. I map your current pipeline, spot the bottlenecks, and estimate ROI for automation.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">02</div>
-          <h3>Proposal</h3>
-          <p>One-page proposal. Fixed scope, fixed price, delivery timeline. No surprises.</p>
+        <div class="process-step fade-in">
+          <span class="step-num">02</span>
+          <h3>Scope</h3>
+          <p>One-page proposal with fixed price, timeline, and deliverables. No surprises. You approve before anything starts.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">03</div>
+        <div class="process-step fade-in">
+          <span class="step-num">03</span>
           <h3>Build</h3>
-          <p>I build and test your solution. Weekly check-ins so you see progress.</p>
+          <p>I build it. Weekly check-ins, async updates in Slack. You keep running experiments while I automate.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">04</div>
-          <h3>Deploy</h3>
-          <p>Deployed, documented, and hands-on walkthrough. 30–60 days of support included.</p>
+        <div class="process-step fade-in">
+          <span class="step-num">04</span>
+          <h3>Ship</h3>
+          <p>Deployed, documented, and your team trained. Bug support included. The pipeline is yours, forever.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- ABOUT -->
   <section class="about" id="about">
     <div class="container">
-      <div class="about-content">
-        <div class="about-text">
-          <span class="section-tag">About</span>
-          <h2>Built by a researcher,<br>for researchers.</h2>
-          <p>I'm a computational neuroscience researcher at USC and incoming NIH Summer Fellow at the National Institute of Mental Health. I build the data tools I wish my own labs had.</p>
-          <p>My research spans reinforcement learning models of depression, voice biomarkers for mental health, and fMRI analysis — so I understand the data challenges academic labs face.</p>
-          <div class="about-credentials">
-            <div class="credential">
-              <strong>NIH SIP Fellow</strong>
-              <span>NIMH ETPB, 2026</span>
-            </div>
-            <div class="credential">
-              <strong>USC Neuroscience</strong>
-              <span>Itti Lab & Read Lab</span>
-            </div>
-            <div class="credential">
-              <strong>PRAXIS Founder</strong>
-              <span>Research Society, USC</span>
-            </div>
+      <div class="about-text fade-in">
+        <span class="section-tag">About</span>
+        <h2>Built in the lab, not the classroom.</h2>
+        <p>I'm Peter Zhou — an undergraduate researcher at USC working across computational neuroscience, clinical psychology, and AI systems. I've spent the past year building infrastructure inside active research labs.</p>
+        <p>I founded PRAXIS (Psychiatry Research, Analytics & eXperimental Innovation Society) to bridge the gap between clinical research questions and the engineering needed to answer them.</p>
+        <p>This summer, I'm joining the NIMH Intramural Research Program for an NIH SIP fellowship in the Experimental Therapeutics & Pathophysiology Branch.</p>
+        <div class="about-credentials">
+          <div class="credential">
+            <strong>USC</strong>
+            <span>Neuroscience & Computer Science</span>
+          </div>
+          <div class="credential">
+            <strong>NIMH/NIH</strong>
+            <span>SIP Fellow — ETPB, Summer 2026</span>
+          </div>
+          <div class="credential">
+            <strong>PRAXIS</strong>
+            <span>Founder & Lead Developer</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="container">
-      <div class="contact-card">
-        <h2>Let's talk about<br>your lab's data.</h2>
-        <p>Book a free 20-minute audit. I'll walk through your workflow and show you what can be automated.</p>
+      <div class="contact-card fade-in">
+        <h2>Let's automate your lab.</h2>
+        <p>Book a free 20-minute audit. I'll walk through your current workflow and show you exactly where automation saves time.</p>
         <div class="contact-actions">
-          <a href="mailto:peterz@usc.edu?subject=Lab%20Data%20Audit%20Request" class="btn btn-primary btn-lg">peterz@usc.edu →</a>
+          <a href="mailto:peterzho@usc.edu" class="btn btn-primary btn-lg">Book Free Audit →</a>
         </div>
-        <p class="contact-note"><a href="https://github.com/czhou732" target="_blank">GitHub</a> · <a href="https://linkedin.com/in/peterzhou" target="_blank">LinkedIn</a></p>
+        <p class="contact-note">or reach out at <a href="mailto:peterzho@usc.edu">peterzho@usc.edu</a></p>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <span>© 2026 Peter Zhou</span>
-      <span>USC · NIH · Los Angeles</span>
+    <div class="container">
+      <div class="footer-inner">
+        <span>© 2026 Peter Zhou</span>
+        <span>USC · PRAXIS · NIMH</span>
+      </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
 </body>
 </html>
