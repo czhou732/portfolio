@@ -605,6 +605,33 @@ img { max-width: 100%; display: block; }
 }
 .bot-msg strong { color: var(--accent-light); }
 
+/* Figure embed in mockup */
+.figure-body {
+  padding: 8px;
+  background: #fff;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.figure-body img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+.figure-mockup {
+  overflow: hidden;
+}
+
+/* Case study action links */
+.case-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+}
+
 .dash-body { padding: 16px; }
 
 .dash-row {

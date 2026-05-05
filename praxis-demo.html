@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRAXIS Bot — Live Demo</title>
+  <meta name="description" content="Try the PRAXIS Research Bot — a RAG-powered AI assistant that answers neuroscience protocol questions from 500+ indexed papers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    .demo-hero {
+      padding: 120px 0 40px;
+      text-align: center;
+    }
+    .demo-hero h1 { font-size: 2.5rem; margin-bottom: 12px; }
+    .demo-hero p { color: var(--text-secondary); max-width: 560px; margin: 0 auto 8px; }
+    .demo-hero .demo-note { font-size: 0.8125rem; color: var(--text-tertiary); }
+
+    .demo-container {
+      max-width: 720px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+
+    /* Chat interface */
+    .chat-window {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .chat-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .chat-header .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px rgba(52,211,153,0.5);
+    }
+    .chat-header span { font-size: 0.875rem; font-weight: 600; }
+    .chat-header .channel { color: var(--text-secondary); font-weight: 400; font-size: 0.8125rem; }
+
+    .chat-messages {
+      padding: 24px 16px;
+      min-height: 320px;
+      max-height: 500px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .msg {
+      padding: 12px 16px;
+      border-radius: 12px;
+      max-width: 85%;
+      animation: msgSlide 0.4s ease;
+    }
+    @keyframes msgSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg-user {
+      background: rgba(255,255,255,0.04);
+      align-self: flex-end;
+      border: 1px solid var(--border);
+    }
+    .msg-bot {
+      background: var(--accent-dim);
+      border: 1px solid rgba(59,130,246,0.15);
+      align-self: flex-start;
+    }
+    .msg strong { display: block; margin-bottom: 4px; font-size: 0.8125rem; }
+    .msg-user strong { color: var(--text); }
+    .msg-bot strong { color: var(--accent-light); }
+    .msg p { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin: 0; }
+    .msg code {
+      background: rgba(255,255,255,0.06);
+      padding: 2px 6px; border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    }
+    .msg-source {
+      margin-top: 8px; padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.75rem; color: var(--text-tertiary);
+    }
+
+    .typing-indicator {
+      display: flex; gap: 4px; padding: 12px 16px;
+      align-self: flex-start;
+    }
+    .typing-indicator span {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-light); opacity: 0.4;
+      animation: blink 1.4s infinite both;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink { 0%,80%,100% { opacity: 0.2; } 40% { opacity: 1; } }
+
+    /* Prompt buttons */
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+    }
+    .prompt-btn {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: var(--text-secondary);
+      font-size: 0.8125rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+      font-family: inherit;
+    }
+    .prompt-btn:hover {
+      background: var(--accent-dim);
+      border-color: rgba(59,130,246,0.25);
+      color: var(--text);
+    }
+    .prompt-btn.used {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-tertiary); font-size: 0.875rem;
+      text-decoration: none; margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent-light); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">PZ<span class="accent">.</span></a>
+      <div class="nav-links">
+        <a href="index.html#services">Services</a>
+        <a href="index.html#work">Work</a>
+        <a href="blog/praxis-bot.html">Blog</a>
+        <a href="index.html#contact" class="nav-cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="demo-hero">
+    <div class="container">
+      <span class="section-tag">Interactive Demo</span>
+      <h1>PRAXIS Research Bot</h1>
+      <p>This is a simulation of how the PRAXIS Bot works inside Slack. Click a question below to see a response — each answer is sourced from real indexed papers.</p>
+      <p class="demo-note">The production bot runs on Slack with FAISS + LangChain over 500+ papers.</p>
+    </div>
+  </section>
+
+  <div class="demo-container">
+    <a href="index.html" class="back-link">← Back to portfolio</a>
+
+    <div class="chat-window">
+      <div class="chat-header">
+        <span class="status-dot"></span>
+        <span>PRAXIS Bot</span>
+        <span class="channel">#research-help</span>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg msg-bot">
+          <strong>PRAXIS Bot</strong>
+          <p>Hi! I'm the PRAXIS Research Bot. I can answer questions about neuroscience protocols, preprocessing pipelines, and research methods from our indexed paper library. Try a question below.</p>
+        </div>
+      </div>
+      <div class="prompt-grid" id="promptGrid">
+        <button class="prompt-btn" data-q="What's the standard preprocessing pipeline for resting-state fMRI?" data-a="Based on Power et al. (2014) and your lab's protocol:&lt;br&gt;&lt;br&gt;1) &lt;code&gt;Slice timing correction&lt;/code&gt;&lt;br&gt;2) &lt;code&gt;Motion correction&lt;/code&gt; (6-parameter rigid body)&lt;br&gt;3) &lt;code&gt;Spatial normalization&lt;/code&gt; → MNI152 template&lt;br&gt;4) &lt;code&gt;Smoothing&lt;/code&gt; (6mm FWHM Gaussian)&lt;br&gt;5) &lt;code&gt;Bandpass filter&lt;/code&gt; (0.01–0.1 Hz)&lt;br&gt;&lt;br&gt;For motion scrubbing, use FD threshold of 0.5mm per Power et al. See &lt;code&gt;#preprocessing-docs&lt;/code&gt; for lab-specific parameters." data-src="Power et al. (2014), NeuroImage · Lab protocol v3.2">fMRI preprocessing pipeline?</button>
+        <button class="prompt-btn" data-q="How does the Rescorla-Wagner model handle reward prediction errors?" data-a="The Rescorla-Wagner update rule:&lt;br&gt;&lt;br&gt;&lt;code&gt;V(t+1) = V(t) + α · δ(t)&lt;/code&gt;&lt;br&gt;&lt;br&gt;Where &lt;code&gt;δ(t) = R(t) - V(t)&lt;/code&gt; is the prediction error, and &lt;code&gt;α&lt;/code&gt; is the learning rate.&lt;br&gt;&lt;br&gt;In anhedonia, we see reduced α (blunted learning from positive outcomes) and lower β (reduced exploitation of learned values), consistent with the LHb → VTA disinhibition hypothesis.&lt;br&gt;&lt;br&gt;Our simulation uses α=0.2 (anhedonic) vs α=0.8 (healthy) with 500 Monte Carlo runs to estimate recovery trajectories." data-src="Rescorla & Wagner (1972) · Huys et al. (2013), Biol Psychiatry">Rescorla-Wagner reward prediction errors?</button>
+        <button class="prompt-btn" data-q="What's the BIDS directory structure for a multi-session study?" data-a="Standard BIDS layout for multi-session:&lt;br&gt;&lt;br&gt;&lt;code&gt;dataset/&lt;/code&gt;&lt;br&gt;&lt;code&gt;├── participants.tsv&lt;/code&gt;&lt;br&gt;&lt;code&gt;├── sub-01/&lt;/code&gt;&lt;br&gt;&lt;code&gt;│   ├── ses-01/&lt;/code&gt;&lt;br&gt;&lt;code&gt;│   │   ├── anat/&lt;/code&gt;&lt;br&gt;&lt;code&gt;│   │   │   └── sub-01_ses-01_T1w.nii.gz&lt;/code&gt;&lt;br&gt;&lt;code&gt;│   │   └── func/&lt;/code&gt;&lt;br&gt;&lt;code&gt;│   │       ├── sub-01_ses-01_task-rest_bold.nii.gz&lt;/code&gt;&lt;br&gt;&lt;code&gt;│   │       └── sub-01_ses-01_task-rest_events.tsv&lt;/code&gt;&lt;br&gt;&lt;code&gt;│   └── ses-02/&lt;/code&gt;&lt;br&gt;&lt;br&gt;Our pipeline auto-generates this from DICOM headers using &lt;code&gt;dcm2bids&lt;/code&gt;." data-src="BIDS Specification v1.8.0 · Gorgolewski et al. (2016)">BIDS directory structure?</button>
+        <button class="prompt-btn" data-q="What quality control metrics should I check after fMRIPrep?" data-a="Post-fMRIPrep QC checklist:&lt;br&gt;&lt;br&gt;1) &lt;code&gt;Framewise Displacement&lt;/code&gt; — flag runs with mean FD &gt; 0.3mm&lt;br&gt;2) &lt;code&gt;tSNR maps&lt;/code&gt; — verify adequate signal in ROIs (NAcc, VTA)&lt;br&gt;3) &lt;code&gt;Registration quality&lt;/code&gt; — overlay T1w on MNI152 in the HTML report&lt;br&gt;4) &lt;code&gt;Carpet plots&lt;/code&gt; — check for global signal artifacts&lt;br&gt;5) &lt;code&gt;ICA-AROMA&lt;/code&gt; — confirm motion components were classified correctly&lt;br&gt;&lt;br&gt;Our dashboard tracks these automatically and flags subjects that fail QC thresholds." data-src="Esteban et al. (2019), Nature Methods · Lab QC protocol">QC metrics after fMRIPrep?</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const chatMessages = document.getElementById('chatMessages');
+    const promptGrid = document.getElementById('promptGrid');
+
+    document.querySelectorAll('.prompt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.add('used');
+
+        // Add user message
+        const userMsg = document.createElement('div');
+        userMsg.className = 'msg msg-user';
+        userMsg.innerHTML = `<strong>You</strong><p>${btn.dataset.q}</p>`;
+        chatMessages.appendChild(userMsg);
+
+        // Show typing indicator
+        const typing = document.createElement('div');
+        typing.className = 'typing-indicator';
+        typing.innerHTML = '<span></span><span></span><span></span>';
+        chatMessages.appendChild(typing);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Simulate response delay
+        setTimeout(() => {
+          typing.remove();
+          const botMsg = document.createElement('div');
+          botMsg.className = 'msg msg-bot';
+          botMsg.innerHTML = `<strong>PRAXIS Bot</strong><p>${btn.dataset.a}</p><div class="msg-source">📄 Sources: ${btn.dataset.src}</div>`;
+          chatMessages.appendChild(botMsg);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1200 + Math.random() * 800);
+      });
+    });
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+
+</body>
+</html>

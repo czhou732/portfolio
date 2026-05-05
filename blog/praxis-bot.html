@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How I Built a RAG Research Bot for My Neuroscience Lab — PZ</title>
+  <meta name="description" content="A technical walkthrough of building PRAXIS Bot — a RAG-powered Slack assistant that indexes 500+ neuroscience papers and answers protocol questions in under 60 seconds.">
+  <meta name="keywords" content="RAG bot, lab automation, neuroscience AI, FAISS, LangChain, Slack bot, research automation, lab AI tools">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body { min-height: 100vh; }
+    .blog-hero {
+      padding: 120px 0 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-hero .container { max-width: 720px; }
+    .blog-meta {
+      display: flex; align-items: center; gap: 16px;
+      color: var(--text-tertiary); font-size: 0.8125rem;
+      margin-bottom: 16px;
+    }
+    .blog-meta span { display: flex; align-items: center; gap: 4px; }
+    .blog-hero h1 {
+      font-size: 2.25rem;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .blog-hero .blog-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+    }
+
+    .blog-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    .blog-content h2 {
+      font-size: 1.375rem;
+      margin: 40px 0 16px;
+      color: var(--text);
+    }
+    .blog-content p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .blog-content strong { color: var(--text); }
+    .blog-content code {
+      background: rgba(255,255,255,0.06);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--accent-light);
+    }
+    .blog-content pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+    .blog-content pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .blog-content ul {
+      color: var(--text-secondary);
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    .blog-content li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .blog-cta {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 48px 0;
+      text-align: center;
+    }
+    .blog-cta p { margin-bottom: 16px; color: var(--text-secondary); }
+    .blog-cta h3 { margin-bottom: 8px; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-tertiary); font-size: 0.875rem;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent-light); }
+
+    .tech-stack-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 12px; margin: 20px 0;
+    }
+    .tech-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .tech-item strong { display: block; margin-bottom: 2px; font-size: 0.875rem; }
+    .tech-item span { color: var(--text-tertiary); font-size: 0.8125rem; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">PZ<span class="accent">.</span></a>
+      <div class="nav-links">
+        <a href="../index.html#services">Services</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../praxis-demo.html">Demo</a>
+        <a href="../index.html#contact" class="nav-cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="blog-hero">
+    <div class="container">
+      <a href="../index.html" class="back-link">← Back to portfolio</a>
+      <div class="blog-meta">
+        <span>May 2026</span>
+        <span>·</span>
+        <span>5 min read</span>
+        <span>·</span>
+        <span>Lab Automation</span>
+      </div>
+      <h1>How I Built a RAG Research Bot for My Neuroscience Lab</h1>
+      <p class="blog-subtitle">The PRAXIS Bot indexes 500+ neuroscience papers and answers protocol questions in Slack. Here's the architecture, the trade-offs, and what I'd do differently.</p>
+    </div>
+  </section>
+
+  <article class="blog-content">
+
+    <h2>The Problem</h2>
+    <p>Our lab had a knowledge bottleneck. Eight people working across fMRI preprocessing, computational modeling, and clinical data analysis, all asking variations of the same questions: <em>"What's the motion threshold?"</em> <em>"Which normalization template are we using?"</em> <em>"What did Power et al. say about scrubbing?"</em></p>
+    <p>The answers existed, scattered across PDFs, Google Docs, and tribal knowledge in people's heads. Finding them took 20-30 minutes per question. Multiply that across eight people, and we were burning hours every week on information retrieval instead of research.</p>
+
+    <h2>The Architecture</h2>
+    <p>I built a retrieval-augmented generation (RAG) system deployed as a Slack bot. The pipeline is straightforward:</p>
+
+    <div class="tech-stack-grid">
+      <div class="tech-item">
+        <strong>Ingestion</strong>
+        <span>PyMuPDF + custom chunker for PDFs, protocols, and lab docs</span>
+      </div>
+      <div class="tech-item">
+        <strong>Embedding</strong>
+        <span>sentence-transformers (all-MiniLM-L6-v2) for semantic search</span>
+      </div>
+      <div class="tech-item">
+        <strong>Vector Store</strong>
+        <span>FAISS with IVF-PQ indexing for sub-second retrieval</span>
+      </div>
+      <div class="tech-item">
+        <strong>Generation</strong>
+        <span>LangChain + Ollama (local LLM) for answer synthesis</span>
+      </div>
+    </div>
+
+    <p>The key design decision was running the LLM locally. We handle sensitive research data and pre-publication manuscripts, so sending queries to OpenAI was off the table. We use <code>Qwen3:14b</code> via Ollama, which runs comfortably on our lab Mac with 32GB RAM.</p>
+
+    <h2>The Chunking Strategy</h2>
+    <p>Getting chunking right was the hardest part. Academic papers have structure that generic chunkers destroy. My approach:</p>
+    <ul>
+      <li><strong>Section-aware splitting</strong> — chunks respect paper section boundaries (Methods stays with Methods)</li>
+      <li><strong>Overlap of 128 tokens</strong> — enough context to avoid orphaned references</li>
+      <li><strong>Metadata injection</strong> — each chunk carries the paper title, authors, year, and section header as prefix metadata</li>
+      <li><strong>Protocol priority</strong> — lab-specific protocols get 2x weight in the retrieval ranking</li>
+    </ul>
+    <p>This metadata injection was critical. Without it, the bot would return technically correct answers from the wrong paper. With it, answers include proper citations, which our team trusts more.</p>
+
+    <h2>Deployment: Slack Socket Mode</h2>
+    <p>The bot runs on Slack's Socket Mode, which means no public endpoint. It connects outbound to Slack's WebSocket, so it works behind our university firewall with zero port forwarding.</p>
+
+<pre><code># Core event loop (simplified)
+@app.event("app_mention")
+def handle_mention(event, say):
+    query = event["text"]
+    docs = retriever.get_relevant_documents(query)
+    answer = chain.invoke({
+        "question": query,
+        "context": format_docs(docs)
+    })
+    say(answer, thread_ts=event["ts"])</code></pre>
+
+    <p>I run it as a <code>launchd</code> daemon on macOS, so it auto-starts on boot and restarts on crash. Total uptime since deployment: 99.7%.</p>
+
+    <h2>Results</h2>
+    <p>After three months in production:</p>
+    <ul>
+      <li><strong>500+ papers indexed</strong> across neuroscience, psychology, and computational methods</li>
+      <li><strong>Literature search dropped from 30 min to under 60 seconds</strong> for common questions</li>
+      <li><strong>8 active users</strong> across the lab team</li>
+      <li><strong>Zero data leakage incidents</strong> — everything runs local, nothing leaves the network</li>
+    </ul>
+
+    <h2>What I'd Do Differently</h2>
+    <p>If I rebuilt it today, I'd use <strong>ColBERT v2</strong> instead of dense embeddings + FAISS. Late-interaction retrieval handles the long-tail queries (specific figure references, statistical thresholds) that dense embeddings miss. I'd also add a feedback loop so team members can thumbs-up/down answers, creating a continuous improvement signal without manual curation.</p>
+
+    <div class="blog-cta">
+      <h3>Want something like this for your lab?</h3>
+      <p>I build custom research infrastructure — from RAG bots to preprocessing pipelines. Fixed price, delivered in weeks.</p>
+      <a href="../index.html#contact" class="btn btn-primary">Book Free Audit →</a>
+    </div>
+
+    <p style="color: var(--text-tertiary); font-size: 0.8125rem; text-align: center;">Peter Zhou · USC Neuroscience & Computer Science · PRAXIS</p>
+
+  </article>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+
+</body>
+</html>
